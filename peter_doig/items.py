@@ -1,8 +1,3 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
-
 import scrapy
 import re
 from datetime import datetime
@@ -19,20 +14,20 @@ def get_text(text_raw):
     return text_raw.strip()
 
 
-# Extracts price in gbp
+# Extracts price in GBP
 def get_price_gbp(gbp_raw):
     gbp_str = re.sub('[\sGBP,]', '', gbp_raw)
     gbp = float(gbp_str)
     return gbp
 
 
-# Converts gbp to usd
+# Converts GBP to USD
 def gbp_to_usd(gbp_price):
     usd = (gbp_price)*1.19
     return usd
 
 
-# Extracts estimated price in gbp
+# Extracts estimated price in GBP
 def gpb_est(price_gbp_est):
     gbp_est_range = [x.replace(',', '') for x in re.findall(
         r'[A-Z]{3} (\d{1,3}(?:,\d{3})*)', price_gbp_est)]
@@ -40,7 +35,7 @@ def gpb_est(price_gbp_est):
     return gbp_est_range
 
 
-# Extracts estimated price in gbp and converts it to usd
+# Extracts estimated price in GBP and converts it to USD
 def usd_est(price_gbp_est):
     gbp_est_range = [x.replace(',', '') for x in re.findall(
         r'[A-Z]{3} (\d{1,3}(?:,\d{3})*)', price_gbp_est)]
@@ -53,9 +48,9 @@ def usd_est(price_gbp_est):
 def str_to_date(date_str):
     return datetime.strptime(date_str, '%d %b %Y').date()
 
-
+# Defines the Spider class
 class PeterDoigItem(scrapy.Item):
-    # define the fields for your item here
+    # Defines the fields for your item 
     artist_name = scrapy.Field(
         input_processor=MapCompose(get_name))
 

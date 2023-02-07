@@ -31,42 +31,71 @@ df['rawDim'].values
 
 # In[55]:
 
-
+# Reads a csv data and stores it in a pandas dataframe
 df = pd.read_csv('dim_df_correct.csv')
 
+# Creates 3 empty lists for height, width and depth
 h = []
 w = []
 d = []
 
+# Iterates through each value in the 'rawDim' column
 for raw in df['rawDim']:
+    # Replaces any sequence of digits, separated by whitespaces and any 
+    # character that is not an alphabet, decimal, comma, slash, whitespace, 
+    # parentheses, colon or period with the sequence of digits separated by the letter 'x'
     text = re.sub(r'(\d)\s*[^a-zA-Z\.\,\/\d\s\(\)\:]+\s*(\d)', r'\1x\2', raw)
+
+    # Replaces a sequence of digits, followed by whitespaces and a fraction of digits 
+    # separated by a slash and white spaces, with a float value that is the sum of the 
+    # first sequence of digits and the float representation of the fraction
     text = re.sub(r'(\d+) +(\d+)\s*\/\s*(\d+)', 
                   lambda m: str(float(m.group(1)) + ( float(m.group(2))/float(m.group(3)))) , text)
+
+    # Finds pattern which represents a sequence of digits, decimal, comma or slash, followed by the 
+    # letter 'x' or 'by', followed by another sequence of digits, decimal, comma or slash, 
+    # followed by an optional sequence of the same pattern, followed by the string 'in' or 'cm'
     group = re.findall(r"(?i)([\d\.\,\/ ]+)(?:[x\×]|by)([\d\.\, \/]+)(?:(?:[x\×]|by)([\d\.\, \/]+))?(in|cm)", text)
+    
+    # Creates 3 variables and initializes them to the string value 'NaN'
     height = width = depth = 'NaN'
-    if group and len(group) :
+
+    # Checks if 'group' is a non-empty list
+    if group and len(group):
+
+        # Strips any whitespaces in the elements of the last tuple in 'group', and replace commas with dots 
         group = group[-1]
         group = [i.strip() for i in group]
         group = [i.replace(',', '.') for i in group]
 
+        # Converts each element in 'group' list to a float, and if the corresponding element is not an 
+        # empty string, the value of its corresponding variable is set to the float value. If the element 
+        # is an empty string, its orresponding variable is set to 0.
         height = float(group[0]) if group[0] and group[0] != '' else 0 
         width = float(group[1]) if group[1] and group[1] != '' else 0
-        depth = float(group[2]) if group[2] and group[2] != '' else 0
+        depth = float(group[2]) if group[2] and group[2] != '' else 
+
+        # Sets the value of dimension to be the fourth element of the 'group' list
         dimension = group[3]
+
+        # Checks if the value of dimension in lowercase is not equal to 'cm' and multiplies it by 2.54 to 
+        # convert it to 'cm'
         if dimension.lower() != 'cm' :
             height = height * 2.54
             width = width * 2.54
             depth = depth * 2.54
 
-
+        # If the height, width, or depth value is not present, it sets the value as 'NaN'
         height  = height if group[0] and group[0] != '' else 'NaN'
         width   = width  if group[1] and group[1] != '' else 'NaN'
         depth   = depth  if group[2] and group[2] != '' else 'NaN'
 
+    # Appends the height, width, and depth values as float type to the list h, w, and d respectively
     h.append(float(height))
     w.append(float(width))
     d.append(float(depth))
 
+# Assignes the values in h, w, and d to columns height, width, and depth in the pandas dataframe df
 df['height'] = h
 df['width'] = w
 df['depth'] = d
@@ -84,7 +113,7 @@ df
 
 # In[56]:
 
-
+# Reads a csv data and stores it in a pandas dataframe
 flights = pd.read_csv('flights.csv')
 airports = pd.read_csv('airports.csv')
 weather = pd.read_csv('weather.csv')
@@ -93,13 +122,14 @@ airlines = pd.read_csv('airlines.csv')
 
 # In[57]:
 
-
+# Connects to the database and creates sql tables from pandas dataframe
 conn = sqlite3.connect('nycflights13.db')
 flights.to_sql('flights', conn, if_exists='replace')
 airports.to_sql('airports', conn, if_exists='replace')
 airlines.to_sql('airlines', conn, if_exists='replace')
 weather.to_sql('weather', conn, if_exists='replace')
 
+# Closes connection to the database
 conn.close()
 
 
@@ -122,21 +152,21 @@ conn.close()
 # In[58]:
 
 
-# connects to the database
+# Connects to the database and assigns a cursor
 conn = sqlite3.connect("nycflights13.db")
-# assigns cursor
 cur = conn.cursor()
 
-# sql query
+# Sql query performs a join operation on the 'flights' and 'airlines' tables to get the 
+# values of the 'name', 'arr_time', 'origin', and 'dest' columns
 flights_1 = pd.read_sql_query("""SELECT name, arr_time, origin, dest 
             FROM flights 
             JOIN airlines 
             ON flights.carrier=airlines.carrier;""", conn)
 
-# saves new table to the database
+# Saves new table to the database
 flights_1.to_sql("flights_1", conn, if_exists="replace")
 
-# closes cursor and connection to the database
+# Closes cursor and connection to the database
 cur.close()
 conn.close()
 
@@ -148,15 +178,20 @@ flights_1
 # In[59]:
 
 
+# Connects to the database and assigns a cursor
 conn = sqlite3.connect("nycflights13.db")
 cur = conn.cursor()
 
+# Sql query retrieves the rows from the 'flights_1' dataframe that have the value 'JetBlue Airways' 
+# in the 'name' column
 jetblue_flights = pd.read_sql_query("""SELECT *
             FROM flights_1
             WHERE name = 'JetBlue Airways';""", conn)
 
+# Replaces the 'flights_1' table with an updated 'flights_1' table
 flights_1.to_sql("flights_1", conn, if_exists="replace")
 
+# Closes cursor and connection to the database
 cur.close()
 conn.close()
 
@@ -168,17 +203,21 @@ jetblue_flights
 # In[60]:
 
 
+# Connects to the database and assigns a cursor
 conn = sqlite3.connect("nycflights13.db")
 cur = conn.cursor()
 
+# Sql query summarizes the total number of flights by 'origin' in ascending order
 total_flights = pd.read_sql_query("""SELECT origin, SUM(flight) 
                                     AS num_flights
                                     FROM flights
                                     GROUP BY origin
                                     ORDER BY num_flights ASC;""", conn)
 
+# Saves new table to the database
 total_flights.to_sql("total_flights", conn, if_exists="replace")
 
+# Closes cursor and connection to the database
 cur.close()
 conn.close()
 
@@ -190,13 +229,16 @@ total_flights
 # In[61]:
 
 
+# Connects to the database and assigns a cursor
 conn = sqlite3.connect("nycflights13.db")
 cur = conn.cursor()
 
+# Sql query returns only 'origins' with more than 10,000 flights
 origins_1 = pd.read_sql_query("""SELECT origin, num_flights 
                             FROM total_flights
                             WHERE num_flights > 10000;""", conn)
 
+# Closes cursor and connection to the database
 cur.close()
 conn.close()
 
