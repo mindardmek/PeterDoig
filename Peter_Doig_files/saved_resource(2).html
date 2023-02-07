@@ -1,0 +1,46 @@
+
+<!-- saved from url=(0011)about:blank -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"></head><body marginwidth="0" marginheight="0"><div id="aio-launcher-container" data-bind="click:function(){ $data ? ($data.type == &#39;backend&#39; ? $data.toggleNew() : $data.toggleNew()): &#39;&#39;},css:($data ? ($data.type == &#39;backend&#39; ? &#39;chat_window-&#39;+$data.settings().chat_window : &#39;chat_window-&#39;+$data.settings().chat_window)  : &#39;no-win&#39;)" class="chat_window-simple">
+<div>
+<div class="aio-launcher aio-launcher-light-theme" role="button" data-bind="attr:{&#39;aria-label&#39;:$data ? $data.getTransMsg(&#39;Chat with us&#39;): &#39;Chat with us&#39;},css:{&#39;aio-launcher-status-show&#39; : ($data ? ($data.ui.status() == &#39;max&#39; &amp;&amp; $data.status() != &#39;chat_form&#39;):false), &#39;aio-launcher-light-theme&#39;:  ($data ? $data.is_light_theme() : false) }" aria-label="Chat with us">
+<div class="aio-launcher-open-icon">
+<svg width="33.387" height="30.903" viewBox="0 0 33.387 30.903"><path d="M-5609-86.341l0,0c1.733-1.734,2.361-5.261,2.583-7.915a12.95,12.95,0,0,1-2.586-7.721,13.239,13.239,0,0,1,4.581-9.914A16.49,16.49,0,0,1-5593.361-116a16.486,16.486,0,0,1,11.057,4.106,13.24,13.24,0,0,1,4.581,9.914,13.24,13.24,0,0,1-4.581,9.914,16.486,16.486,0,0,1-11.057,4.106,17.2,17.2,0,0,1-5.373-.856c3.02-1.967,3.018-2.048,3.012-2.385a.55.55,0,0,0-.263-.456.538.538,0,0,0-.277-.077.542.542,0,0,0-.44.226c-.326.266-1.888,1.309-3.292,2.224l-.011,0A28.115,28.115,0,0,1-5609-86.341Zm7.811-13.538a.812.812,0,0,0-.811.811.812.812,0,0,0,.811.811h9.465a.812.812,0,0,0,.811-.811.812.812,0,0,0-.811-.811Zm0-3.3a.812.812,0,0,0-.811.811.812.812,0,0,0,.811.811h15.049a.812.812,0,0,0,.811-.811.812.812,0,0,0-.811-.811Zm0-3.3a.812.812,0,0,0-.811.811.812.812,0,0,0,.811.811h15.049a.812.812,0,0,0,.811-.811.812.812,0,0,0-.811-.811Z" transform="translate(5610.61 116.499)" fill="#fff" stroke="rgba(0,0,0,0)" stroke-width="1"></path></svg>
+</div>
+<div class="aio-launcher-close-icon" data-bind="css:{&#39;cobrowseonly&#39;:($root &amp;&amp; $root.cobrowseonly())}">
+<svg width="16" height="16" viewBox="0 0 16 16"><path d="M3.07 11.013l2.402-2.402A.839.839 0 0 0 5.722 8a.84.84 0 0 0-.25-.611L3.07 4.987a.839.839 0 0 1-.25-.612.84.84 0 0 1 .25-.61l.694-.695a.839.839 0 0 1 .611-.25.84.84 0 0 1 .612.25l2.402 2.416a.84.84 0 0 0 .611.25.84.84 0 0 0 .611-.25l2.402-2.416a.839.839 0 0 1 .612-.25c.236 0 .444.083.625.25l.666.694a.8.8 0 0 1 .264.611.801.801 0 0 1-.264.612l-2.388 2.402a.839.839 0 0 0-.25.61.84.84 0 0 0 .25.612l2.388 2.402c.18.18.264.375.264.612a.801.801 0 0 1-.264.61l-.666.695a.895.895 0 0 1-.625.25.84.84 0 0 1-.612-.25l-2.402-2.416a.839.839 0 0 0-.61-.25.84.84 0 0 0-.612.25L4.987 12.93a.839.839 0 0 1-.612.25.84.84 0 0 1-.61-.25l-.695-.694a.84.84 0 0 1-.25-.611c0-.223.083-.431.25-.612z"></path></svg>
+</div>
+</div>
+<!-- ko if:(($data && $data.type == 'frontend' && $data.settings().chat_window == 'simple'))-->
+<div class="aio-launcher-simple-text" data-bind="text:($data ? ($data.type == &#39;backend&#39; ? $data.getTransMsg(&#39;Chat with us&#39;): $data.getTransMsg(&#39;Chat with us&#39;)) : &#39;&#39;)">Chat with us</div>
+<!-- /ko -->
+</div>
+</div>
+<style type="text/css">@import "https://fonts.googleapis.com/css?family=Roboto:400,500,700";#aio-launcher-container{line-height:1;height:60px}#aio-launcher-container *{font-family:"Roboto","Helvetica Neue","Apple Color Emoji",Helvetica,Arial,sans-serif}#aio-launcher-container .cobrowseonly svg{transform:rotate(49deg)}#aio-launcher-container .aio-launcher{position:absolute;top:0;left:0;width:60px;height:60px;border-radius:50%;cursor:pointer;-webkit-transform-origin:center;transform-origin:center;-webkit-backface-visibility:hidden;backface-visibility:hidden;overflow:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#aio-launcher-container .aio-launcher *{cursor:pointer}#aio-launcher-container .aio-launcher.aio-launcher-light-theme .aio-launcher-close-icon svg circle,#aio-launcher-container .aio-launcher.aio-launcher-light-theme .aio-launcher-close-icon svg path,#aio-launcher-container .aio-launcher.aio-launcher-light-theme .aio-launcher-open-icon svg circle,#aio-launcher-container .aio-launcher.aio-launcher-light-theme .aio-launcher-open-icon svg path{fill:#000}#aio-launcher-container .aio-launcher-close-icon,#aio-launcher-container .aio-launcher-open-icon{display:flex;align-items:center;justify-content:center;position:absolute;top:0;bottom:0;width:100%;-webkit-transition:opacity .08s linear,-webkit-transform .16s linear;transition:transform .16s linear,opacity .08s linear;transition:transform .16s linear,opacity .08s linear,-webkit-transform .16s linear}#aio-launcher-container .aio-launcher-modern .aio-launcher-open-icon{transition:transform .4s ease .2s;transition:transform .4s ease .2s,-webkit-transform .4s ease .2s}#aio-launcher-container.chat_window-simple .aio-launcher-close-icon{transform:rotate(0deg)!important}#aio-launcher-container .aio-launcher-open-icon{opacity:1;transform:rotate(0deg) scale(1)}#aio-launcher-container .aio-launcher-open-icon svg{width:28px;height:32px}#aio-launcher-container .aio-launcher-close-icon{opacity:0;transform:rotate(40deg)}#aio-launcher-container .aio-launcher-close-icon svg{width:20px;height:20px}#aio-launcher-container .aio-launcher-close-icon svg path{fill:#fff}#aio-launcher-container .aio-launcher-status-show .aio-launcher-open-icon{opacity:0;transform:rotate(30deg) scale(0)}#aio-launcher-container .aio-launcher-status-show .aio-launcher-close-icon{opacity:1;transform:rotate(40deg)}#aio-launcher-container .aio-launcher-simple-text{color:#000;line-height:60px;height:60px;font-weight:700;font-size:16px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;margin-left:60px;max-width:calc(100% - 70px);float:left;user-select:none;pointer-events:none}#aio-launcher-container .aio-launcher-simple-text:after{content:" ";clear:both}#aio-container .acquire-tooltip-wrapper .acquire-tooltip-content {background-color:#000 !important;color:#fff !important;}
+
+#aio-container .home-conversation-text,
+.header-back-action-button-back-icon,
+.header-back-action-button-body {
+    display: none !important;
+}
+#aio-container .chat-group-row-wrapper {
+    border: none!important;
+}
+#aio-container .chat-group-row .chat-group-list-avatar {
+    position: unset !important;
+    display: table !important;
+    vertical-align: middle !important;
+}
+#aio-container .chat-group-row-body {
+    margin-left: 0px !important;
+    margin-top: 25px !important;
+}
+#aio-container .chat-group-row-avatar img {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+/*IFRAME_CSS*/
+.tagove-livechat-widget {z-index:9020 !important;}
+body {width:100%;}
+
+.acquire-launcher-wrapper {box-shadow:none;}</style></body></html>
